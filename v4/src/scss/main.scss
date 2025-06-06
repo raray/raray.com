@@ -1,0 +1,184 @@
+@use './global/reset';
+@use './global/fonts';
+@use './defines/vars';
+@use './defines/functions';
+@use 'sass:math';
+
+body {
+  background-color: vars.$color-white;
+}
+
+.frame {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  box-shadow: inset 0 0 0 functions.fluid-clamp(10px, 20px) vars.$color-black;
+
+  @media (min-aspect-ratio: 1/1) {
+    box-shadow: inset 0 0 0 functions.fluid-clamp(10px, 20px, $unit: vh) vars.$color-black;
+  }
+}
+
+.logo {
+  position: relative;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50dvw;
+  aspect-ratio: 1;
+  border-radius: 50%;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: 50%;
+    background-color: vars.$color-black;
+    transform: scale(1.05);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: 50%;
+    background-color: vars.$color-brand-yellow;
+  }
+
+  @media (min-aspect-ratio: 1/1) {
+    width: auto;
+    height: 50dvh;
+  }
+}
+
+.logo__image {
+  position: relative;
+  z-index: 3;
+  width: 65%;
+  height: auto;
+  display: block;
+}
+
+$title-offset-min: 25px;
+$title-offset-max: 80px;
+$font-size-min: 32px;
+$font-size-max: 112px;
+
+.title {
+  position: absolute;
+  top: functions.fluid-clamp(-$title-offset-max, -$title-offset-min, vars.$width-content-max, vars.$width-content-min);
+  left: functions.fluid-clamp(-$title-offset-max, -$title-offset-min, vars.$width-content-max, vars.$width-content-min);
+  width: calc(100% + functions.fluid-clamp($title-offset-min * 2, $title-offset-max * 2));
+  height: calc(100% + functions.fluid-clamp($title-offset-min * 2, $title-offset-max * 2));
+  color: vars.$color-black;
+  text-align: center;
+  font: 700
+    functions.fluid-clamp($font-size-min, $font-size-max) / 0
+    'Space Grotesk', sans-serif;
+  text-transform: none;
+
+  @media (min-aspect-ratio: 1/1) {
+    top: functions.fluid-clamp(-$title-offset-max, -$title-offset-min, vars.$width-content-max, vars.$width-content-min, vh);
+    left: functions.fluid-clamp(-$title-offset-max, -$title-offset-min, vars.$width-content-max, vars.$width-content-min, vh);
+    width: calc(100% + functions.fluid-clamp($title-offset-min * 2, $title-offset-max * 2, $unit: vh));
+    height: calc(100% + functions.fluid-clamp($title-offset-min * 2, $title-offset-max * 2, $unit: vh));
+    font-size: functions.fluid-clamp($font-size-min, $font-size-max, $unit: vh);
+  }
+}
+
+.nav {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  // background: green;
+}
+
+$nav-item-size-min: 60px;
+$nav-item-size-max: 120px;
+$arc-angle: 60deg; // total arc span
+$arc-center: 120deg; // arc center direction
+$nav-items: 3;
+$radius: 35.5;
+
+.nav__item {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+  height: 25%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: vars.$color-white;
+  color: vars.$color-black;
+  text-decoration: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: 50%;
+    background-color: vars.$color-black;
+    transform: scale(1.2);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: 50%;
+    background-color: vars.$color-white;
+  }
+
+  @for $i from 1 through $nav-items {
+    $spread: if($nav-items > 1, $arc-angle / ($nav-items - 1), 0deg);
+    $angle: $arc-center - ($arc-angle / 2) + ($spread * ($i - 1));
+
+    &:nth-child(#{$i}) {
+      transform:
+        translate(-50%, -50%)
+        rotate($angle)
+        translateY(-#{$radius}dvw)
+        rotate(-$angle);
+
+        @media (min-aspect-ratio: 1/1) {
+          transform:
+            translate(-50%, -50%)
+            rotate($angle)
+            translateY(-#{$radius}dvh)
+            rotate(-$angle);
+        }
+    }
+  }
+}
+
+.nav__item-icon {
+  position: relative;
+  z-index: 3;
+  width: 70%;
+}
+
+.nav__item-label {
+  position: relative;
+  z-index: 3;
+  display: none;
+  font: 700
+    functions.fluid-clamp(16px, 20px) / functions.fluid-clamp(16px, 20px)
+    'Space Grotesk', sans-serif;
+
+  @media (min-width: 800px) and (min-height: 800px) {
+    display: block;
+  }
+}
