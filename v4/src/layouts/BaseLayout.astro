@@ -1,0 +1,32 @@
+---
+import "../scss/main.scss";
+import Nav from "../components/Nav.astro";
+import { ClientRouter } from "astro:transitions";
+
+const { navPlace } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Vite App</title>
+        <ClientRouter />
+    </head>
+
+    <body>
+        <main class="frame">
+            <Nav place={navPlace} transition:persist />
+
+            <div class:list={["content", { "content--hide": !navPlace }]}>
+                <div class="content__scroll">
+                    <div class="content__inner">
+                        <slot />
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>
