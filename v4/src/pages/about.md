@@ -15,4 +15,4 @@ I care about writing great code that solves real business problems. No matter th
 
 ---
 
-At home - when not working remotely - I'm usually wrangling my two sons and three pets alongisde my wife of 18 years. I'm an avid tabletop gamer, a music and art enthusiast, and a sci-fi nerd.
+At home - when not working remotely - I'm usually wrangling my two sons and three pets alongside my wife of 18 years. I'm an avid tabletop gamer, a music and art enthusiast, and a sci-fi nerd.

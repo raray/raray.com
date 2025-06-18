@@ -23,7 +23,6 @@ body {
   inset: 0 0 0 50dvw;
   box-shadow: inset 0 0 0 functions.fluid-clamp(10px, 20px) vars.$color-black;
   background: vars.$color-white;
-  transition: inset 0.5s ease-in-out;
 
   @media (min-aspect-ratio: 1/1) {
     inset: 0 0 0 50dvh;

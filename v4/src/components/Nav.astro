@@ -1,6 +1,6 @@
 ---
-import "iconify-icon";
 import Title from "./ra-text.svg";
+import { Icon } from "astro-icon/components";
 const { place } = Astro.props;
 ---
 
@@ -145,7 +145,8 @@ const { place } = Astro.props;
   .nav__item-icon {
     position: relative;
     z-index: 3;
-    width: 70%;
+    width: 45%;
+    height: auto;
   }
 
   .nav__item-label {
@@ -174,29 +175,16 @@ const { place } = Astro.props;
 
   <nav class="nav" role="navigation" aria-label="Main navigation">
     <a class="nav__item" href="/about" aria-label="About">
-      <iconify-icon
-        class="nav__item-icon"
-        icon="solar:user-hand-up-bold"
-        width="none"></iconify-icon>
+      <Icon class="nav__item-icon" name="solar--user-hand-up-bold" />
       <span class="nav__item-label">About</span>
     </a>
     <a class="nav__item" href="/work" aria-label="Work">
-      <iconify-icon
-        class="nav__item-icon"
-        icon="solar:code-circle-bold"
-        width="none"></iconify-icon>
+      <Icon class="nav__item-icon" name="solar--code-circle-bold" />
       <span class="nav__item-label">Work</span>
     </a>
     <a class="nav__item" href="/" aria-label="Resume">
-      <iconify-icon
-        class="nav__item-icon"
-        icon="solar:document-text-bold"
-        width="none"></iconify-icon>
+      <Icon class="nav__item-icon" name="solar--document-text-bold" />
       <span class="nav__item-label">Resume</span>
     </a>
   </nav>
 </div>
-
-<script>
-  import "iconify-icon";
-</script>
