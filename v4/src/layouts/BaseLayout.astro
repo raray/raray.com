@@ -7,10 +7,12 @@ const { navPlace } = Astro.props;
 ---
 
 <!doctype html>
-<Head />
-<html lang="en">
+<head>
+    <Head />
+</head>
+<html lang="en" transition:name="root" transition:animate="none">
     <body>
-        <main class="frame">
+        <main class="frame" transition:animate="slide">
             <Nav place={navPlace} />
 
             <div class:list={["content", { "content--hide": !navPlace }]}>
