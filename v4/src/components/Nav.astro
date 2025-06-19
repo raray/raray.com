@@ -1,190 +1,221 @@
 ---
-import Title from "./ra-text.svg";
-import { Icon } from "astro-icon/components";
+import Title from "../svg/ra-text.svg";
+import CodeIcon from "../svg/solar--code-circle-bold.svg";
+import DocumentIcon from "../svg/solar--document-text-bold.svg";
+import UserIcon from "../svg/solar--user-hand-up-bold.svg";
 const { place } = Astro.props;
 ---
 
-<style lang="scss">
-  @use "../scss/defines/functions";
-  @use "../scss/defines/vars";
+<div
+    class={`logo ${place ? `logo--${place}` : ""}`}
+    transition:persist
+    transition:animate="none"
+>
+    <Title class="title" />
 
-  .logo {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50dvw;
-    aspect-ratio: 1;
-    border-radius: 50%;
+    <img src="/img/ra-logo.svg" class="logo__image" alt="R.A. Ray's logo" />
 
-    &::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      border-radius: 50%;
-      background-color: vars.$color-black;
-      transform: scale(1.05);
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+        <a class="nav__item" href="/about" aria-label="About">
+            <UserIcon class="nav__item-icon" />
+            <span class="nav__item-label">About</span>
+        </a>
+        <!-- <a class="nav__item" href="/work" aria-label="Work">
+            <CodeIcon class="nav__item-icon" />
+            <span class="nav__item-label">Work</span>
+        </a> -->
+        <a class="nav__item" href="/resume" aria-label="Resume">
+            <DocumentIcon class="nav__item-icon" />
+            <span class="nav__item-label">Resume</span>
+        </a>
+    </nav>
+</div>
+
+<script>
+    const logo = document.querySelector(".logo");
+
+    document.addEventListener("astro:after-swap", (e) => {
+        if (e.target.location.pathname === "/") {
+            logo?.classList.remove("logo--min");
+
+            return;
+        }
+
+        logo?.classList.add("logo--min");
+    });
+</script>
+
+<style lang="scss" is:global>
+    @use "../scss/defines/functions";
+    @use "../scss/defines/vars";
+
+    @keyframes logo {
+        0% {
+            transform: translate3d(100%, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
     }
 
-    &::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      border-radius: 50%;
-      background-color: vars.$color-brand-yellow;
-    }
+    .logo {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50dvw;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        transition:
+            transform 0.5s ease-out,
+            left 0.5s ease-out;
 
-    @media (min-aspect-ratio: 1/1) {
-      width: auto;
-      height: 50dvh;
-    }
-  }
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            border-radius: 50%;
+            background-color: vars.$color-black;
+            transform: scale(1.05);
+        }
 
-  .logo--min {
-    transform: translateY(-50%) scale(0.5);
-    left: 0;
-  }
-
-  .logo__image {
-    position: relative;
-    z-index: 3;
-    width: 65%;
-    height: auto;
-    display: block;
-  }
-
-  $title-offset-min: 25px;
-  $title-offset-max: 80px;
-  $font-size-min: 32px;
-  $font-size-max: 112px;
-
-  .title {
-    position: absolute;
-    inset: 0;
-    transform: scale(1.35);
-    fill: vars.$color-black;
-  }
-
-  .nav {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    // background: green;
-  }
-
-  $nav-item-size-min: 60px;
-  $nav-item-size-max: 120px;
-  $arc-angle: 60deg; // total arc span
-  $arc-center: 120deg; // arc center direction
-  $nav-items: 3;
-  $radius: 35.5;
-
-  .nav__item {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 25%;
-    height: 25%;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    background: vars.$color-white;
-    color: vars.$color-black;
-    text-decoration: none;
-
-    &::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      border-radius: 50%;
-      background-color: vars.$color-black;
-      transform: scale(1.2);
-    }
-
-    &::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      border-radius: 50%;
-      background-color: vars.$color-white;
-    }
-
-    @for $i from 1 through $nav-items {
-      $spread: if($nav-items > 1, $arc-angle / ($nav-items - 1), 0deg);
-      $angle: $arc-center - ($arc-angle / 2) + ($spread * ($i - 1));
-
-      &:nth-child(#{$i}) {
-        transform: translate(-50%, -50%)
-          rotate($angle)
-          translateY(-#{$radius}dvw)
-          rotate(-$angle);
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            border-radius: 50%;
+            background-color: vars.$color-brand-yellow;
+        }
 
         @media (min-aspect-ratio: 1/1) {
-          transform: translate(-50%, -50%) rotate($angle)
-            translateY(-#{$radius}dvh) rotate(-$angle);
+            width: auto;
+            height: 50dvh;
         }
-      }
-    }
-  }
-
-  .nav__item-icon {
-    position: relative;
-    z-index: 3;
-    width: 45%;
-    height: auto;
-  }
-
-  .nav__item-label {
-    position: relative;
-    z-index: 3;
-    display: none;
-    font:
-      700 functions.fluid-clamp(16px, 20px) / functions.fluid-clamp(16px, 20px)
-        "Space Grotesk",
-      sans-serif;
-
-    @media (min-width: 800px) and (min-height: 800px) {
-      display: block;
     }
 
-    .logo--min & {
-      display: none;
+    .logo--min {
+        transform: translateY(-50%) scale(0.5);
+        left: 0;
     }
-  }
+
+    .logo__image {
+        position: relative;
+        z-index: 3;
+        width: 65%;
+        height: auto;
+        display: block;
+    }
+
+    $title-offset-min: 25px;
+    $title-offset-max: 80px;
+    $font-size-min: 32px;
+    $font-size-max: 112px;
+
+    .title {
+        position: absolute;
+        inset: 0;
+        transform: scale(1.35);
+        fill: vars.$color-black;
+    }
+
+    .nav {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    $nav-item-size-min: 60px;
+    $nav-item-size-max: 120px;
+    $arc-angle: 60deg; // total arc span
+    $arc-center: 120deg; // arc center direction
+    $nav-items: 3;
+    $radius: 35.5;
+
+    .nav__item {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 25%;
+        height: 25%;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        background: vars.$color-white;
+        color: vars.$color-black;
+        text-decoration: none;
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            border-radius: 50%;
+            background-color: vars.$color-black;
+            transform: scale(1.2);
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            border-radius: 50%;
+            background-color: vars.$color-white;
+        }
+
+        @for $i from 1 through $nav-items {
+            $spread: if($nav-items > 1, $arc-angle / ($nav-items - 1), 0deg);
+            $angle: $arc-center - ($arc-angle / 2) + ($spread * ($i - 1));
+
+            &:nth-child(#{$i}) {
+                transform: translate(-50%, -50%)
+                    rotate($angle)
+                    translateY(-#{$radius}dvw)
+                    rotate(-$angle);
+
+                @media (min-aspect-ratio: 1/1) {
+                    transform: translate(-50%, -50%) rotate($angle)
+                        translateY(-#{$radius}dvh) rotate(-$angle);
+                }
+            }
+        }
+    }
+
+    .nav__item-icon {
+        position: relative;
+        z-index: 3;
+        width: 45%;
+        height: auto;
+    }
+
+    .nav__item-label {
+        position: relative;
+        z-index: 3;
+        display: none;
+        font:
+            700 functions.fluid-clamp(16px, 20px) /
+                functions.fluid-clamp(16px, 20px) "Space Grotesk",
+            sans-serif;
+
+        @media (min-width: 800px) and (min-height: 800px) {
+            display: block;
+        }
+
+        .logo--min & {
+            display: none;
+        }
+    }
 </style>
-
-<div class={`logo ${place ? `logo--${place}` : ""}`}>
-  <Title class="title" />
-
-  <img src="/img/ra-logo.svg" class="logo__image" alt="R.A. Ray's logo" />
-
-  <nav class="nav" role="navigation" aria-label="Main navigation">
-    <a class="nav__item" href="/about" aria-label="About">
-      <Icon class="nav__item-icon" name="solar--user-hand-up-bold" />
-      <span class="nav__item-label">About</span>
-    </a>
-    <a class="nav__item" href="/work" aria-label="Work">
-      <Icon class="nav__item-icon" name="solar--code-circle-bold" />
-      <span class="nav__item-label">Work</span>
-    </a>
-    <a class="nav__item" href="/" aria-label="Resume">
-      <Icon class="nav__item-icon" name="solar--document-text-bold" />
-      <span class="nav__item-label">Resume</span>
-    </a>
-  </nav>
-</div>

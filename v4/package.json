@@ -9,8 +9,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.9.1",
-    "astro-icon": "^1.1.5",
+    "astro": "^5.9.4",
+    "astro-vtbot": "^2.1.5",
     "circletype": "^2.3.0"
   },
   "packageManager": "yarn@4.9.2",

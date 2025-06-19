@@ -1,0 +1,17 @@
+@use 'functions';
+@use 'vars';
+@use 'sass:list';
+
+@mixin type-scale-styles($type-scale-name) {
+  $index: list.index(vars.$type-scale-names, $type-scale-name);
+
+  font: list.nth(vars.$type-scale-weight, $index)
+    functions.fluid-clamp(list.nth(vars.$type-scale-size-min, $index), list.nth(vars.$type-scale-size-max, $index)) /
+    functions.fluid-clamp(list.nth(vars.$type-scale-line-height-min, $index), list.nth(vars.$type-scale-line-height-max, $index))
+    vars.$font-name-space-grotesk,sans-serif;
+
+    @media (min-aspect-ratio: 1/1) {
+      font-size: functions.fluid-clamp(list.nth(vars.$type-scale-size-min, $index), list.nth(vars.$type-scale-size-max, $index), $unit: vh);
+      line-height: functions.fluid-clamp(list.nth(vars.$type-scale-line-height-min, $index), list.nth(vars.$type-scale-line-height-max, $index), $unit: vh);
+    }
+}

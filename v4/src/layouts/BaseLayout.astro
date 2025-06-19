@@ -2,26 +2,63 @@
 import "../scss/main.scss";
 import Nav from "../components/Nav.astro";
 import Head from "../components/Head.astro";
+import Wysiwyg from "../components/Wysiwyg.astro";
+import { slide } from "astro:transitions";
+import VtBotDebug from "astro-vtbot/components/VtBotDebug.astro";
 
 const { navPlace } = Astro.props;
+
+const anim = {
+    old: {
+        name: "panel",
+        duration: "0.5s",
+        easing: "ease-in",
+        direction: "reverse",
+    },
+    new: {
+        name: "panel",
+        duration: "0.5s",
+        easing: "ease-in-out",
+    },
+};
+
+const customTransition = {
+    forwards: anim,
+    backwards: anim,
+};
 ---
 
 <!doctype html>
 <head>
+    <VtBotDebug />
     <Head />
 </head>
-<html lang="en" transition:name="root" transition:animate="none">
+<html lang="en">
     <body>
-        <main class="frame" transition:animate="slide">
+        <main class="frame">
             <Nav place={navPlace} />
 
-            <div class:list={["content", { "content--hide": !navPlace }]}>
+            <div
+                class:list={["content", { "content--hide": !navPlace }]}
+                transition:animate={customTransition}
+            >
                 <div class="content__scroll">
-                    <div class="content__inner">
+                    <Wysiwyg class:list={["content__inner"]}>
                         <slot />
-                    </div>
+                    </Wysiwyg>
                 </div>
             </div>
         </main>
     </body>
 </html>
+
+<style lang="scss" is:global>
+    @keyframes panel {
+        0% {
+            transform: translate3d(100%, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>

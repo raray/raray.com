@@ -1,0 +1,8 @@
+@use 'defines/mixins';
+@use 'defines/vars';
+
+@each $type-scale-name in vars.$type-scale-names {
+  .u-type-#{$type-scale-name} {
+    @include mixins.type-scale-styles($type-scale-name);
+  }
+}

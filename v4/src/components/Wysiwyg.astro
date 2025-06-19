@@ -1,0 +1,135 @@
+---
+const { class: className, ...rest } = Astro.props;
+---
+
+<div class:list={["s-wysiwyg", className]} {...rest}>
+    <slot />
+</div>
+
+<style lang="scss" is:global>
+    @use "../scss/defines/functions";
+    @use "../scss/defines/mixins";
+    @use "../scss/defines/vars";
+
+    @mixin adjust-gap($min, $max) {
+        margin-top: functions.fluid-clamp(
+            $max,
+            $min,
+            vars.$width-content-max,
+            vars.$width-content-min
+        );
+
+        @media (min-aspect-ratio: 1/1) {
+            margin-top: functions.fluid-clamp(
+                $max,
+                $min,
+                vars.$width-content-max,
+                vars.$width-content-min,
+                dvh
+            );
+        }
+    }
+
+    .s-wysiwyg {
+        display: flex;
+        flex-direction: column;
+        gap: functions.fluid-clamp(20px, 40px);
+
+        @media (min-aspect-ratio: 1/1) {
+            gap: functions.fluid-clamp(20px, 40px, $unit: dvh);
+        }
+
+        h1 {
+            @include mixins.type-scale-styles("h1");
+
+            text-align: center;
+        }
+
+        h2 {
+            @include mixins.type-scale-styles("h2");
+
+            margin-left: -10px;
+            width: fit-content;
+            padding-inline: 10px;
+            box-shadow: 3px 3px vars.$color-black;
+            background-color: vars.$color-brand-yellow;
+            text-transform: uppercase;
+        }
+
+        h3 {
+            @include mixins.type-scale-styles("h3");
+        }
+
+        :is(h1, h2, h3, h4, h5, h6) + h3 {
+            @include adjust-gap(-5px, -25px);
+        }
+
+        h4 {
+            @include mixins.type-scale-styles("h4");
+        }
+
+        h5 {
+            @include mixins.type-scale-styles("h5");
+        }
+
+        h6 {
+            @include mixins.type-scale-styles("h6");
+        }
+
+        :is(h1, h2, h3, h4, h5, h6, p, ul, ol) + h6 {
+            @include adjust-gap(-10px, -30px);
+        }
+
+        p {
+            @include mixins.type-scale-styles("body");
+        }
+
+        :is(h1, h2, h3) + p {
+            @include adjust-gap(-5px, -25px);
+        }
+
+        :is(h4, h5, h6) + p {
+            @include adjust-gap(-15px, -35px);
+        }
+
+        hr + p::first-letter {
+            float: left;
+            font-size: functions.fluid-clamp(40px, 56px);
+            line-height: functions.fluid-clamp(39px, 55px);
+            font-weight: 600;
+
+            @media (min-aspect-ratio: 1/1) {
+                font-size: functions.fluid-clamp(40px, 56px, $unit: vh);
+                line-height: functions.fluid-clamp(39px, 55px, $unit: vh);
+            }
+        }
+
+        ul,
+        ol {
+            @include mixins.type-scale-styles("caption");
+
+            padding-left: 20px;
+            list-style-type: disc;
+        }
+
+        p + :is(ul, ol) {
+            @include adjust-gap(-15px, -35px);
+        }
+
+        hr {
+            width: 10%;
+            height: 3px;
+            background: vars.$color-black;
+        }
+
+        a {
+            color: vars.$color-black;
+            text-decoration: underline 3px vars.$color-brand-yellow;
+            font-weight: 600;
+        }
+
+        strong {
+            font-weight: 700;
+        }
+    }
+</style>
