@@ -11,7 +11,7 @@
                 sans-serif;
             text-align: center;
 
-            @media (min-aspect-ratio: 1/1) {
+            @include mixins.media-wide {
                 font-size: functions.fluid-clamp(24px, 60px, $unit: vh);
                 line-height: functions.fluid-clamp(24px, 60px, $unit: vh);
             }
@@ -23,7 +23,7 @@
                     functions.fluid-clamp(20px, 28px) "Space Grotesk",
                 sans-serif;
 
-            @media (min-aspect-ratio: 1/1) {
+            @include mixins.media-wide {
                 font-size: functions.fluid-clamp(16px, 20px, $unit: vh);
                 line-height: functions.fluid-clamp(20px, 28px, $unit: vh);
             }
@@ -35,7 +35,7 @@
             line-height: functions.fluid-clamp(39px, 55px);
             font-weight: 600;
 
-            @media (min-aspect-ratio: 1/1) {
+            @include mixins.media-wide {
                 font-size: functions.fluid-clamp(40px, 56px, $unit: vh);
                 line-height: functions.fluid-clamp(39px, 55px, $unit: vh);
             }

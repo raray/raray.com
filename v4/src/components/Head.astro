@@ -1,9 +1,18 @@
 ---
 import { ClientRouter } from "astro:transitions";
+
+const { title } = Astro.props;
 ---
 
 <meta charset="UTF-8" />
 <link rel="icon" type="image/svg+xml" href="/vite.svg" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Vite App</title>
+<meta
+    name="description"
+    content="Full-stack web developer and technical team lead working remotely from Texas, USA."
+/>
+<title>
+    {title && `${title} |`} R.A. Ray | Web Developer, Maker of Things, Person That
+    Cares
+</title>
 <ClientRouter />

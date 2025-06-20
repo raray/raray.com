@@ -1,5 +1,6 @@
 ---
 layout: ../layouts/SubPageLayout.astro
+title: Resume
 ---
 
 # R.A. Ray's Resume

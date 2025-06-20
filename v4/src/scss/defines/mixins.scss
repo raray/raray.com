@@ -2,6 +2,42 @@
 @use 'vars';
 @use 'sass:list';
 
+@mixin media-wide {
+  @media (aspect-ratio >= 1) {
+    @content;
+  }
+}
+
+@mixin media-tall {
+  @media (aspect-ratio < 1) {
+    @content;
+  }
+}
+
+@mixin media-sm-width {
+  @media (width < #{vars.$media-breakpoint-lg}) {
+    @content;
+  }
+}
+
+@mixin media-sm-height {
+  @media (height < #{vars.$media-breakpoint-lg}) {
+    @content;
+  }
+}
+
+@mixin media-lg-width {
+  @media (width >= #{vars.$media-breakpoint-lg}) {
+    @content;
+  }
+}
+
+@mixin media-lg-height {
+  @media (width >= #{vars.$media-breakpoint-lg}) {
+    @content;
+  }
+}
+
 @mixin type-scale-styles($type-scale-name) {
   $index: list.index(vars.$type-scale-names, $type-scale-name);
 
@@ -10,7 +46,7 @@
     functions.fluid-clamp(list.nth(vars.$type-scale-line-height-min, $index), list.nth(vars.$type-scale-line-height-max, $index))
     vars.$font-name-space-grotesk,sans-serif;
 
-    @media (min-aspect-ratio: 1/1) {
+    @include media-tall {
       font-size: functions.fluid-clamp(list.nth(vars.$type-scale-size-min, $index), list.nth(vars.$type-scale-size-max, $index), $unit: vh);
       line-height: functions.fluid-clamp(list.nth(vars.$type-scale-line-height-min, $index), list.nth(vars.$type-scale-line-height-max, $index), $unit: vh);
     }

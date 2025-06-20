@@ -19,7 +19,7 @@ const { class: className, ...rest } = Astro.props;
             vars.$width-content-min
         );
 
-        @media (min-aspect-ratio: 1/1) {
+        @include mixins.media-wide {
             margin-top: functions.fluid-clamp(
                 $max,
                 $min,
@@ -35,7 +35,7 @@ const { class: className, ...rest } = Astro.props;
         flex-direction: column;
         gap: functions.fluid-clamp(20px, 40px);
 
-        @media (min-aspect-ratio: 1/1) {
+        @include mixins.media-wide {
             gap: functions.fluid-clamp(20px, 40px, $unit: dvh);
         }
 
@@ -98,7 +98,7 @@ const { class: className, ...rest } = Astro.props;
             line-height: functions.fluid-clamp(39px, 55px);
             font-weight: 600;
 
-            @media (min-aspect-ratio: 1/1) {
+            @include mixins.media-wide {
                 font-size: functions.fluid-clamp(40px, 56px, $unit: vh);
                 line-height: functions.fluid-clamp(39px, 55px, $unit: vh);
             }
