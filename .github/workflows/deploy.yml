@@ -1,0 +1,43 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - main
+      - dev
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 24
+    - name: Build
+      run: |
+        cd ./v4
+        yarn
+        yarn build
+    - name: Deploy Dev
+      if: github.ref == 'refs/heads/dev'
+      uses: burnett01/rsync-deployments@7.0.2
+      with:
+        switches: -zvr --delete
+        remote_host: 198.187.29.221
+        remote_port: 21098
+        remote_user: rarakiqz
+        remote_key: ${{ secrets.SSH_KEY }}
+        remote_key_pass: ${{ secrets.SSH_KEY_PASS }}
+        path: v4/dist/
+        remote_path: dev.raray.com/
+    - name: Deploy Prod
+      if: github.ref == 'refs/heads/main'
+      uses: burnett01/rsync-deployments@7.0.2
+      with:
+        switches: -zvr --delete
+        remote_host: 198.187.29.221
+        remote_port: 21098
+        remote_user: rarakiqz
+        remote_key: ${{ secrets.SSH_KEY }}
+        remote_key_pass: ${{ secrets.SSH_KEY_PASS }}
+        path: v4/dist/
+        remote_path: public_html/
