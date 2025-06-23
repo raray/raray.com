@@ -9,13 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Switch to v4
-      run: cd ./v4
     - uses: actions/setup-node@v4
       with:
         node-version: 24
     - name: Build
       run: |
+        run: cd ./v4
         yarn
         yarn build
     - name: Deploy Dev
@@ -26,5 +25,5 @@ jobs:
         ssh-port: 21098
         remote-user: rarakiqz
         private-ssh-key: ${{ secrets.SSH_KEY }}
-        source-path: ./dist/
+        source-path: ./v4/dist/
         destination-path: ~/dev.raray.com/
