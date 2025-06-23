@@ -14,7 +14,7 @@ jobs:
         node-version: 24
     - name: Build
       run: |
-        run: cd ./v4
+        cd ./v4
         yarn
         yarn build
     - name: Deploy Dev
