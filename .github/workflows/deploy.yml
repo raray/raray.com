@@ -19,11 +19,13 @@ jobs:
         yarn build
     - name: Deploy Dev
       if: github.ref == 'refs/heads/dev'
-      uses: SamKirkland/web-deploy@v1
+      uses: burnett01/rsync-deployments@7.0.2
       with:
-        target-server: 198.187.29.221
-        ssh-port: 21098
-        remote-user: rarakiqz
-        private-ssh-key: ${{ secrets.SSH_KEY }}
-        source-path: ./v4/dist/
-        destination-path: ~/dev.raray.com/
+        switches: -zvr --delete
+        remote_host: 198.187.29.221
+        remote_port: 21098
+        remote_user: rarakiqz
+        remote_key: ${{ secrets.SSH_KEY }}
+        remote_key_pass: ${{ secrets.SSH_KEY_PASS }}
+        path: v4/dist/
+        remote_path: /dev.raray.com/
