@@ -4,6 +4,7 @@ import vtbot from 'astro-vtbot';
 
 // https://astro.build/config
 export default defineConfig({
+  integrations: [vtbot()],
   vite: {
     css: {
       preprocessorOptions: {
@@ -14,5 +15,4 @@ export default defineConfig({
       },
     }
   },
-  integrations: [vtbot()],
 });
