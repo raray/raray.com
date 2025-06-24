@@ -1,47 +1,38 @@
 ---
-import Title from "../svg/ra-text.svg";
 import CodeIcon from "../svg/solar--code-circle-bold.svg";
 import DocumentIcon from "../svg/solar--document-text-bold.svg";
 import UserIcon from "../svg/solar--user-hand-up-bold.svg";
+
 const { isContentShown } = Astro.props;
+
 ---
 
-<div
-    class:list={["logo", { "logo--min": isContentShown }]}
-    transition:persist
-    transition:animate="none"
->
-    <a class="title" href="/"><Title /></a>
-
-    <img src="/img/ra-logo.svg" class="logo__image" alt="R.A. Ray's logo" />
-
-    <nav class="nav" role="navigation" aria-label="Main navigation">
-        <a class="nav__item" href="/about" aria-label="About">
-            <UserIcon class="nav__item-icon" />
-            <span class="nav__item-label">About</span>
-        </a>
-        <!-- <a class="nav__item" href="/work" aria-label="Work">
-            <CodeIcon class="nav__item-icon" />
-            <span class="nav__item-label">Work</span>
-        </a> -->
-        <a class="nav__item" href="/resume" aria-label="Resume">
-            <DocumentIcon class="nav__item-icon" />
-            <span class="nav__item-label">Resume</span>
-        </a>
-    </nav>
-</div>
+<nav class:list={["nav", { "nav--min": isContentShown }]} role="navigation" aria-label="Main navigation">
+    <a class="nav__item" href="/about" aria-label="About">
+        <UserIcon class="nav__item-icon" />
+        <span class="nav__item-label">About</span>
+    </a>
+    <!-- <a class="nav__item" href="/work" aria-label="Work">
+        <CodeIcon class="nav__item-icon" />
+        <span class="nav__item-label">Work</span>
+    </a> -->
+    <a class="nav__item" href="/resume" aria-label="Resume">
+        <DocumentIcon class="nav__item-icon" />
+        <span class="nav__item-label">Resume</span>
+    </a>
+</nav>
 
 <script>
-    const logo = document.querySelector(".logo");
+    const nav = document.querySelector(".nav");
 
     document.addEventListener("astro:after-swap", (e) => {
         if (e.target.location.pathname === "/") {
-            logo?.classList.remove("logo--min");
+            nav?.classList.remove("nav--min");
 
             return;
         }
 
-        logo?.classList.add("logo--min");
+        nav?.classList.add("nav--min");
     });
 </script>
 
@@ -49,103 +40,7 @@ const { isContentShown } = Astro.props;
     @use "../scss/defines/functions";
     @use "../scss/defines/mixins";
     @use "../scss/defines/vars";
-
-    @keyframes logo {
-        0% {
-            transform: translate3d(100%, 0, 0);
-        }
-        100% {
-            transform: translate3d(0, 0, 0);
-        }
-    }
-
-    .logo {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate3d(-50%, -50%, 0);
-        margin: auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 50dvw;
-        height: auto;
-        aspect-ratio: 1;
-        transition: all 0.5s ease-out;
-
-        &::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            border-radius: 50%;
-            background-color: vars.$color-black;
-            transform: scale(1.05);
-        }
-
-        &::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            z-index: 2;
-            border-radius: 50%;
-            background-color: vars.$color-brand-yellow;
-        }
-
-        @include mixins.media-wide {
-            width: auto;
-            height: 50dvh;
-        }
-
-        // tall and narrow
-        @include mixins.media-tall {
-            @include mixins.media-sm-width {
-                width: auto;
-                height: 50dvw;
-            }
-        }
-    }
-
-    .logo--min {
-        left: 25dvh;
-        transform: translate3d(-50%, -50%, 0) scale(0.5);
-
-        // tall and narrow
-        @include mixins.media-tall {
-            @include mixins.media-sm-width {
-                top: 12.5dvh;
-                left: 50%;
-                transform: translate3d(-50%, -50%, 0) scale(0.25);
-                width: auto;
-                height: 50dvh;
-            }
-        }
-    }
-
-    .logo__image {
-        position: relative;
-        z-index: 3;
-        width: 65%;
-        height: auto;
-        display: block;
-    }
-
-    $title-offset-min: 25px;
-    $title-offset-max: 80px;
-    $font-size-min: 32px;
-    $font-size-max: 112px;
-
-    .title {
-        position: absolute;
-        inset: 0;
-        transform: scale(1.4) rotate(-45deg);
-        fill: vars.$color-black;
-        transition: transform 0.5s ease-out;
-
-        .logo--min & {
-            transform: scale(1.4) rotate(0deg);
-        }
-    }
+    @use "sass:math";
 
     .nav {
         position: absolute;
@@ -201,11 +96,11 @@ const { isContentShown } = Astro.props;
         }
 
         @for $i from 1 through $nav-items {
-            $spread: if($nav-items > 1, $arc-angle / ($nav-items - 1), 0deg);
-            $angle: $arc-center - ($arc-angle / 2) + ($spread * ($i - 1));
+            $spread: if($nav-items > 1, math.div($arc-angle, ($nav-items - 1)), 0deg);
+            $angle: $arc-center - math.div($arc-angle, 2) + ($spread * ($i - 1));
 
             $angle-min: $arc-center-min -
-                ($arc-angle / 2) +
+                math.div($arc-angle, 2) +
                 ($spread * ($i - 1));
 
             &:nth-child(#{$i}) {
@@ -220,7 +115,7 @@ const { isContentShown } = Astro.props;
                 }
             }
 
-            .logo--min &:nth-child(#{$i}) {
+            .nav--min &:nth-child(#{$i}) {
                 transform: translate(-50%, -50%)
                     rotate($angle-min)
                     translateY(-#{$radius}dvw)
@@ -262,7 +157,7 @@ const { isContentShown } = Astro.props;
             display: block;
         }
 
-        .logo--min & {
+        .nav--min & {
             display: none;
         }
     }

@@ -5,10 +5,11 @@ const { title } = Astro.props;
 ---
 
 <meta charset="UTF-8" />
-<link rel="icon" type="image/svg+xml" href="/img/favicon.png" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Full-stack web developer and technical team lead working remotely from Texas, USA." />
-<title>
-    {title && `${title} |`} R.A. Ray | Web Developer, Maker of Things, Person That Cares
-</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="icon" type="image/svg+xml" href="/img/favicon.png" />
+
+<title>{title && `${title} |`} R.A. Ray | Web Developer, Maker of Things, Person That Cares</title>
+
 <ClientRouter />

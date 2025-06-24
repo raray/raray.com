@@ -1,8 +1,8 @@
-@use './global/reset';
-@use './global/fonts';
 @use './defines/functions';
 @use './defines/mixins';
 @use './defines/vars';
+@use './global/fonts';
+@use './global/reset';
 @use './utilities';
 
 body {
