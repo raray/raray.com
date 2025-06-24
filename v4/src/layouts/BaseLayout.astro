@@ -1,22 +1,22 @@
 ---
 import "../scss/main.scss";
-import Nav from "../components/Nav.astro";
 import Content from "../components/Content.astro";
 import Head from "../components/Head.astro";
-import VtBotDebug from "astro-vtbot/components/VtBotDebug.astro";
+import Logo from "../components/Logo.astro";
+// import VtBotDebug from "astro-vtbot/components/VtBotDebug.astro";
 
 const { isContentShown, frontmatter } = Astro.props;
 ---
 
 <!doctype html>
 <head>
-    <VtBotDebug />
+    <!-- <VtBotDebug /> -->
     <Head title={frontmatter?.title} />
 </head>
 <html lang="en">
     <body>
         <main class="frame">
-            <Nav isContentShown={isContentShown} />
+            <Logo isContentShown={isContentShown} />
 
             <Content isShown={isContentShown}>
                 <slot />

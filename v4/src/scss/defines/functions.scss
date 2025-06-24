@@ -1,5 +1,5 @@
-@use 'vars';
 @use 'sass:math';
+@use 'vars';
 
 @function decimal-round($number, $decimals: 0) {
   $n: 1;

@@ -1,6 +1,6 @@
 @use 'functions';
-@use 'vars';
 @use 'sass:list';
+@use 'vars';
 
 @mixin media-wide {
   @media (aspect-ratio >= 1) {

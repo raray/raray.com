@@ -4,5 +4,15 @@ import vtbot from 'astro-vtbot';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [vtbot()]
+  integrations: [vtbot()],
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler',
+          silenceDeprecations: ['mixed-decls'],
+        },
+      },
+    }
+  },
 });
