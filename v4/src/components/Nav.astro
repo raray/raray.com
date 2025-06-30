@@ -1,164 +1,177 @@
 ---
-import CodeIcon from "../svg/solar--code-circle-bold.svg";
-import DocumentIcon from "../svg/solar--document-text-bold.svg";
-import UserIcon from "../svg/solar--user-hand-up-bold.svg";
+import CodeIcon from '../svg/solar--code-circle-bold.svg'
+import DocumentIcon from '../svg/solar--document-text-bold.svg'
+import UserIcon from '../svg/solar--user-hand-up-bold.svg'
 
-const { isContentShown } = Astro.props;
+const { isContentShown } = Astro.props
 
 ---
 
-<nav class:list={["nav", { "nav--min": isContentShown }]} role="navigation" aria-label="Main navigation">
-    <a class="nav__item" href="/about" aria-label="About">
-        <UserIcon class="nav__item-icon" />
-        <span class="nav__item-label">About</span>
-    </a>
-    <!-- <a class="nav__item" href="/work" aria-label="Work">
-        <CodeIcon class="nav__item-icon" />
-        <span class="nav__item-label">Work</span>
-    </a> -->
-    <a class="nav__item" href="/resume" aria-label="Resume">
-        <DocumentIcon class="nav__item-icon" />
-        <span class="nav__item-label">Resume</span>
-    </a>
+<nav class:list={['nav', { 'nav--min': isContentShown }]} role="navigation" aria-label="Main navigation">
+  <a class="nav__item" href="/about/" aria-label="About">
+    <UserIcon class="nav__item-icon" />
+
+    <span class="nav__item-label">About</span>
+  </a>
+
+  <a class="nav__item" href="/work/" aria-label="Work">
+    <CodeIcon class="nav__item-icon" />
+
+    <span class="nav__item-label">Work</span>
+  </a>
+
+  <a class="nav__item" href="/resume/" aria-label="Resume">
+    <DocumentIcon class="nav__item-icon" />
+
+    <span class="nav__item-label">Resume</span>
+  </a>
 </nav>
 
 <script>
-    const nav = document.querySelector(".nav");
+  const nav = document.querySelector('.nav')
 
-    document.addEventListener("astro:after-swap", (e) => {
-        if (e.target.location.pathname === "/") {
-            nav?.classList.remove("nav--min");
+  document.addEventListener('astro:after-swap', (e) => {
+    if (e.target?.location.pathname === '/') {
+      nav?.classList.remove('nav--min')
 
-            return;
-        }
+      return
+    }
 
-        nav?.classList.add("nav--min");
-    });
+    nav?.classList.add('nav--min')
+  })
 </script>
 
 <style lang="scss" is:global>
-    @use "../scss/defines/functions";
-    @use "../scss/defines/mixins";
-    @use "../scss/defines/vars";
-    @use "sass:math";
+  @use "../scss/defines/functions";
+  @use "../scss/defines/mixins";
+  @use "../scss/defines/vars";
+  @use "sass:math";
 
-    .nav {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
+  .nav {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  $arc-angle: 60deg; // total arc span
+  $arc-center: 135deg; // arc center direction
+  $arc-center-min: 178deg;
+  $nav-items: 3;
+  $radius: 35.5;
+
+  .nav__item {
+    position: absolute;
+    z-index: 3;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+    height: 25%;
+    border-radius: 50%;
+    background: vars.$color-white;
+    color: vars.$color-black;
+    text-decoration: none;
+    transition: transform 0.5s ease-out;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      border-radius: 50%;
+      background-color: vars.$color-black;
+      transform: scale(1.2);
     }
 
-    $arc-angle: 60deg; // total arc span
-    $arc-center: 145deg; // arc center direction
-    $arc-center-min: 194deg;
-    $nav-items: 3;
-    $radius: 35.5;
-
-    .nav__item {
-        position: absolute;
-        z-index: 3;
-        left: 50%;
-        top: 50%;
-        transform: translate3d(-50%, -50%, 0);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 25%;
-        height: 25%;
-        border-radius: 50%;
-        background: vars.$color-white;
-        color: vars.$color-black;
-        text-decoration: none;
-        transition: transform 0.5s ease-out;
-
-        &::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            border-radius: 50%;
-            background-color: vars.$color-black;
-            transform: scale(1.2);
-        }
-
-        &::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            z-index: 2;
-            border-radius: 50%;
-            background-color: vars.$color-white;
-        }
-
-        @for $i from 1 through $nav-items {
-            $spread: if($nav-items > 1, math.div($arc-angle, ($nav-items - 1)), 0deg);
-            $angle: $arc-center - math.div($arc-angle, 2) + ($spread * ($i - 1));
-
-            $angle-min: $arc-center-min -
-                math.div($arc-angle, 2) +
-                ($spread * ($i - 1));
-
-            &:nth-child(#{$i}) {
-                transform: translate3d(-50%, -50%, 0)
-                    rotate($angle)
-                    translateY(-#{$radius}dvw)
-                    rotate(-$angle);
-
-                @include mixins.media-wide {
-                    transform: translate3d(-50%, -50%, 0) rotate($angle)
-                        translate3d(0, -#{$radius}dvh, 0) rotate(-$angle);
-                }
-            }
-
-            .nav--min &:nth-child(#{$i}) {
-                transform: translate(-50%, -50%)
-                    rotate($angle-min)
-                    translateY(-#{$radius}dvw)
-                    rotate(-$angle-min);
-
-                @include mixins.media-wide {
-                    transform: translate(-50%, -50%) rotate($angle-min)
-                        translateY(-#{$radius}dvh) rotate(-$angle-min);
-                }
-
-                // tall and narrow
-                @include mixins.media-tall {
-                    @include mixins.media-sm-width {
-                        transform: translate(-50%, -50%) rotate($angle-min)
-                            translateY(-#{$radius}dvh) rotate(-$angle-min);
-                    }
-                }
-            }
-        }
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      border-radius: 50%;
+      background-color: vars.$color-white;
     }
 
-    .nav__item-icon {
-        position: relative;
-        z-index: 3;
-        width: 45%;
-        height: auto;
-    }
+    @for $i from 1 through $nav-items {
+      $spread: if($nav-items > 1, math.div($arc-angle, ($nav-items - 1)), 0deg);
+      $angle: $arc-center - math.div($arc-angle, 2) + ($spread * ($i - 1));
 
-    .nav__item-label {
-        position: relative;
-        z-index: 3;
-        display: none;
-        font:
-            700 functions.fluid-clamp(16px, 20px) /
-                functions.fluid-clamp(16px, 20px) "Space Grotesk",
-            sans-serif;
+      $angle-min: $arc-center-min - math.div($arc-angle, 2) + ($spread * ($i - 1));
 
-        @media (min-width: 800px) and (min-height: 800px) {
-            display: block;
+      &:nth-child(#{$i}) {
+        transform:
+          translate3d(-50%, -50%, 0)
+          rotate($angle)
+          translateY(-#{$radius}dvw)
+          rotate(-$angle);
+
+        @include mixins.media-wide {
+          transform:
+            translate3d(-50%, -50%, 0)
+            rotate($angle)
+            translate3d(0, -#{$radius}dvh, 0)
+            rotate(-$angle);
+        }
+      }
+
+      .nav--min &:nth-child(#{$i}) {
+        transform:
+          translate(-50%, -50%)
+          rotate($angle-min)
+          translateY(-#{$radius}dvw)
+          rotate(-$angle-min);
+
+        @include mixins.media-wide {
+          transform:
+            translate(-50%, -50%)
+            rotate($angle-min)
+            translateY(-#{$radius}dvh)
+            rotate(-$angle-min);
         }
 
-        .nav--min & {
-            display: none;
+        // tall and narrow
+        @include mixins.media-tall {
+          @include mixins.media-sm-width {
+            transform:
+              translate(-50%, -50%)
+              rotate($angle-min)
+              translateY(-#{$radius}dvh)
+              rotate(-$angle-min);
+          }
         }
+      }
     }
+  }
+
+  .nav__item-icon {
+    position: relative;
+    z-index: 3;
+    width: 45%;
+    height: auto;
+  }
+
+  .nav__item-label {
+    position: relative;
+    z-index: 3;
+    display: none;
+    font:
+      700 functions.fluid-clamp(16px, 20px) / functions.fluid-clamp(16px, 20px) "Space Grotesk",
+      sans-serif;
+
+    @media (min-width: 800px) and (min-height: 800px) {
+      display: block;
+    }
+
+    .nav--min & {
+      display: none;
+    }
+  }
 </style>

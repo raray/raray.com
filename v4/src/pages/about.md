@@ -1,5 +1,6 @@
 ---
 layout: ../layouts/SubPageLayout.astro
+title: About
 ---
 # About R.A. Ray
 

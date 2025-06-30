@@ -1,9 +1,9 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import BaseLayout from '../layouts/BaseLayout.astro'
 
-const { frontmatter } = Astro.props;
+const { frontmatter } = Astro.props
 ---
 
 <BaseLayout isContentShown="true" frontmatter={frontmatter}>
-    <slot />
+  <slot />
 </BaseLayout>

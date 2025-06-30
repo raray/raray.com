@@ -1,136 +1,136 @@
 ---
-import Nav from "./Nav.astro";
-import RaLogo from "../svg/ra-logo.svg";
-import Title from "../svg/ra-text.svg";
+import Nav from './Nav.astro'
+import RaLogo from '../svg/ra-logo.svg'
+import Title from '../svg/ra-text.svg'
 
-const { isContentShown } = Astro.props;
+const { isContentShown } = Astro.props
 ---
 
 <div
-    class:list={["logo", { "logo--min": isContentShown }]}
-    transition:persist
-    transition:animate="none"
+  class:list={['logo', { 'logo--min': isContentShown }]}
+  transition:persist
+  transition:animate="none"
 >
-    <a class="logo__title" href="/"><Title /></a>
+  <a class="logo__title" href="/" title="R.A. Ray"><Title /></a>
 
-    <RaLogo class="logo__image" />
+  <RaLogo class="logo__image" />
 
-    <Nav isContentShown={isContentShown} />
+  <Nav isContentShown={isContentShown} />
 </div>
 
 <script>
-    const logo = document.querySelector(".logo");
+  const logo = document.querySelector('.logo')
 
-    document.addEventListener("astro:after-swap", (e) => {
-        if (e.target.location.pathname === "/") {
-            logo?.classList.remove("logo--min");
+  document.addEventListener('astro:after-swap', (e) => {
+    if (e.target?.location.pathname === '/') {
+      logo?.classList.remove('logo--min')
 
-            return;
-        }
+      return
+    }
 
-        logo?.classList.add("logo--min");
-    });
+    logo?.classList.add('logo--min')
+  });
 </script>
 
 <style lang="scss" is:global>
-    @use "../scss/defines/functions";
-    @use "../scss/defines/mixins";
-    @use "../scss/defines/vars";
+  @use '../scss/defines/functions';
+  @use '../scss/defines/mixins';
+  @use '../scss/defines/vars';
 
-    @keyframes logo {
-        0% {
-            transform: translate3d(100%, 0, 0);
-        }
-        100% {
-            transform: translate3d(0, 0, 0);
-        }
+  @keyframes logo {
+    0% {
+      transform: translate3d(100%, 0, 0);
+    }
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .logo {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50dvw;
+    height: auto;
+    aspect-ratio: 1;
+    transition: all 0.5s ease-out;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      border-radius: 50%;
+      background-color: vars.$color-black;
+      transform: scale(1.05);
     }
 
-    .logo {
-        position: fixed;
-        top: 50%;
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      border-radius: 50%;
+      background-color: vars.$color-brand-yellow;
+    }
+
+    @include mixins.media-wide {
+      width: auto;
+      height: 50dvh;
+    }
+
+    // tall and narrow
+    @include mixins.media-tall {
+      @include mixins.media-sm-width {
+        width: auto;
+        height: 50dvw;
+      }
+    }
+  }
+
+  .logo--min {
+    left: 25dvh;
+    transform: translate3d(-50%, -50%, 0) scale(0.5);
+
+    // tall and narrow
+    @include mixins.media-tall {
+      @include mixins.media-sm-width {
+        top: 12.5dvh;
         left: 50%;
-        transform: translate3d(-50%, -50%, 0);
-        margin: auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 50dvw;
-        height: auto;
-        aspect-ratio: 1;
-        transition: all 0.5s ease-out;
-
-        &::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            border-radius: 50%;
-            background-color: vars.$color-black;
-            transform: scale(1.05);
-        }
-
-        &::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            z-index: 2;
-            border-radius: 50%;
-            background-color: vars.$color-brand-yellow;
-        }
-
-        @include mixins.media-wide {
-            width: auto;
-            height: 50dvh;
-        }
-
-        // tall and narrow
-        @include mixins.media-tall {
-            @include mixins.media-sm-width {
-                width: auto;
-                height: 50dvw;
-            }
-        }
+        transform: translate3d(-50%, -50%, 0) scale(0.25);
+        width: auto;
+        height: 50dvh;
+      }
     }
+  }
 
-    .logo--min {
-        left: 25dvh;
-        transform: translate3d(-50%, -50%, 0) scale(0.5);
+  .logo__image {
+    position: relative;
+    z-index: 3;
+    display: block;
+    width: 65%;
+    height: auto;
+  }
 
-        // tall and narrow
-        @include mixins.media-tall {
-            @include mixins.media-sm-width {
-                top: 12.5dvh;
-                left: 50%;
-                transform: translate3d(-50%, -50%, 0) scale(0.25);
-                width: auto;
-                height: 50dvh;
-            }
-        }
+  $title-offset-min: 25px;
+  $title-offset-max: 80px;
+  $font-size-min: 32px;
+  $font-size-max: 112px;
+
+  .logo__title {
+    position: absolute;
+    inset: 0;
+    transform: scale(1.4) rotate(-45deg);
+    fill: vars.$color-black;
+    transition: transform 0.5s ease-out;
+
+    .logo--min & {
+      transform: scale(1.4) rotate(0deg);
     }
-
-    .logo__image {
-        position: relative;
-        z-index: 3;
-        width: 65%;
-        height: auto;
-        display: block;
-    }
-
-    $title-offset-min: 25px;
-    $title-offset-max: 80px;
-    $font-size-min: 32px;
-    $font-size-max: 112px;
-
-    .logo__title {
-        position: absolute;
-        inset: 0;
-        transform: scale(1.4) rotate(-45deg);
-        fill: vars.$color-black;
-        transition: transform 0.5s ease-out;
-
-        .logo--min & {
-            transform: scale(1.4) rotate(0deg);
-        }
-    }
+  }
 </style>
