@@ -1,26 +1,27 @@
 ---
-import "../scss/main.scss";
-import Content from "../components/Content.astro";
-import Head from "../components/Head.astro";
-import Logo from "../components/Logo.astro";
-// import VtBotDebug from "astro-vtbot/components/VtBotDebug.astro";
+import '../scss/main.scss'
+import Content from '../components/Content.astro'
+import Head from '../components/Head.astro'
+import Logo from '../components/Logo.astro'
+// import VtBotDebug from 'astro-vtbot/components/VtBotDebug.astro'
 
-const { isContentShown, frontmatter } = Astro.props;
+const { isContentShown, frontmatter } = Astro.props
 ---
 
 <!doctype html>
-<head>
+<html lang="en">
+  <head>
     <!-- <VtBotDebug /> -->
     <Head title={frontmatter?.title} />
-</head>
-<html lang="en">
-    <body>
-        <main class="frame">
-            <Logo isContentShown={isContentShown} />
+  </head>
 
-            <Content isShown={isContentShown}>
-                <slot />
-            </Content>
-        </main>
-    </body>
+  <body>
+    <main class="frame">
+      <Logo isContentShown={isContentShown} />
+
+      <Content isShown={isContentShown}>
+        <slot />
+      </Content>
+    </main>
+  </body>
 </html>
