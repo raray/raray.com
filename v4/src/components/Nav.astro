@@ -30,6 +30,12 @@ const { isContentShown } = Astro.props
 <script>
   const nav = document.querySelector('.nav')
 
+  document.addEventListener('astro:before-preparation', (e) => {
+    if (e.from.href === e.to.href) {
+      e.preventDefault()
+    }
+  })
+
   document.addEventListener('astro:after-swap', (e) => {
     if (e.target?.location.pathname === '/') {
       nav?.classList.remove('nav--min')
