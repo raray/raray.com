@@ -1,8 +1,8 @@
 ---
-title: Kioti.com
+title: KIOTI.com
 ---
 
-# Kioti.com
+# KIOTI.com
 
 ---
 

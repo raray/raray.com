@@ -12,7 +12,7 @@ Here is a selection of case studies from some of the more impactful projects Iâ€
 
 ##### GOODFOLKS
 - [Azul.com](/work/azul/)
-- [Kioti.com](/work/kioti)
+- [KIOTI.com](/work/kioti)
 - PerryWeather.com (coming soon)
 - Electragram (coming soon)
 - TakeCommandHealth.com (coming soon)
