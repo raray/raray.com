@@ -37,9 +37,9 @@ GOODFOLKS, Remote / Client Services / August 2020 - June 2025
 * Directed and contributed to full-stack development for client websites and digital platforms.
 * Engineered and maintained automated deployment workflows to ensure reliable releases.
 * Delivered high-impact projects for prominent clients, including:
-  * [Kioti.com](https://kioti.com) – Full-site custom build on CraftCMS; product API for dealer and customer tooling; implemented multi-stage caching to deliver high performance across all endpoints.
-  * [Azul.com](https://azul.com) – Directed two full-site rebuilds and designed an API-driven download system that eliminated manual content updates and improved delivery speed and accuracy.
-  * [PerryWeather.com](https://perryweather.com) – Rebuilt the site to streamline admin updates and better showcase products through video and animations.
+  * [Kioti.com](/work/kioti/) – Full-site custom build on CraftCMS; product API for dealer and customer tooling; implemented multi-stage caching to deliver high performance across all endpoints.
+  * [Azul.com](/work/azul/) – Directed two full-site rebuilds and designed an API-driven download system that eliminated manual content updates and improved delivery speed and accuracy.
+  * [PerryWeather.com](/work/perryweather/) – Rebuilt the site to streamline admin updates and better showcase products through video and animations.
 
 ---
 

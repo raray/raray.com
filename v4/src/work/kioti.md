@@ -10,7 +10,7 @@ KIOTI is the western-hemisphere DBA for Daedong, an international agricultural m
 
 ---
 
-### Data Management
+## Data Management
 
 KIOTI needed a new system to store and manage their product data—one that was easy to update and avoided the duplication that came from manually entering information across different parts of the site. They also needed a way to share that data with their third-party dealer management software, [Rollick](https://rollick.io/solutions/oem-solutions/).
 
@@ -20,7 +20,7 @@ The end result is a site whose product pages are automatically generated with da
 
 ---
 
-### i18n
+## i18n
 
 One of the more complex challenges was delivering content in three languages (English, Spanish, and French) with region-specific variations for both the U.S. and Canada. Once again, CraftCMS was the perfect choice. Its native internationalization tools allowed us to separate content by language and region while giving us granular control over what was translatable, region-specific, or shared.
 
@@ -28,7 +28,7 @@ We partnered with [Acclaro](https://www.acclaro.com/) for professional translati
 
 ---
 
-### Make It Fast
+## Make It Fast
 
 Performance was a major priority for KIOTI. With a JavaScript- and image-heavy site pulling from multiple data sources, we had to be intentional to keep it fast.
 
