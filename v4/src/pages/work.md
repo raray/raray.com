@@ -12,8 +12,8 @@ Here is a selection of case studies from some of the more impactful projects Iâ€
 
 ##### GOODFOLKS
 - [Azul.com](/work/azul/)
-- [KIOTI.com](/work/kioti)
-- [PerryWeather.com](https://perryweather.com/) (case study coming soon)
+- [KIOTI.com](/work/kioti/)
+- [PerryWeather.com](/work/perryweather/)
 - [Electragram](https://www.vogue.com/article/electragram-online-stationery-company-anna-carter) (case study coming soon)
 - [TakeCommandHealth.com](https://takecommandhealth.com/) (case study coming soon)
 

@@ -10,7 +10,7 @@ I worked on [Azul.com](https://azul.com/) throughout my five-year tenure at GOOD
 
 ---
 
-### Downloads
+## Downloads
 
 Azul manages thousands of JDK versions, all of which need to be [available for download](https://azul.com/downloads/) through their site. When I started, every new release required manually entering package data into the WordPress admin—costing hundreds of work hours annually and introducing countless opportunities for human error.
 
@@ -22,7 +22,7 @@ Today, the downloads feature parses and displays over 11,000 download options in
 
 ---
 
-### Imgix
+## Imgix
 
 Azul’s site is extremely image-heavy. Nearly every one of its hundreds of pages and blog posts includes multiple background and inline images. To improve site-wide performance, we integrated [Imgix](https://imgix.com/) as an image processor and CDN.
 
@@ -32,7 +32,7 @@ We rolled the component out across the site, using existing image data to ensure
 
 ---
 
-### Custom Components
+## Custom Components
 
 The site is built on WordPress and powered by over 100 custom [Gutenberg blocks](https://wordpress.org/gutenberg/) and page templates, all designed to follow a cohesive design system and backed by [ACF](https://www.advancedcustomfields.com/). But sometimes, Azul needs to break the mold for special experiences—like [this campaign page](https://www.azul.com/oracle-java-therapy/).
 
