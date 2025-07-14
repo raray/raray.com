@@ -15,6 +15,7 @@ jobs:
     - name: Build
       run: |
         cd ./v4
+        corepack enable
         pnpm
         pnpm build
     - name: Deploy Dev
