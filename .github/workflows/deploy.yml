@@ -16,7 +16,7 @@ jobs:
       run: |
         cd ./v4
         corepack enable
-        pnpm
+        pnpm install
         pnpm build
     - name: Deploy Dev
       if: github.ref == 'refs/heads/dev'
