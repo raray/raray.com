@@ -11,10 +11,8 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.4.1",
     "astro": "^5.11.0",
-    "astro-vtbot": "^2.1.5",
-    "circletype": "^2.3.0"
+    "astro-vtbot": "^2.1.5"
   },
-  "packageManager": "yarn@4.9.2",
   "devDependencies": {
     "sass-embedded": "^1.89.2"
   }

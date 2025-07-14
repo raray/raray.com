@@ -15,8 +15,8 @@ jobs:
     - name: Build
       run: |
         cd ./v4
-        yarn
-        yarn build
+        pnpm
+        pnpm build
     - name: Deploy Dev
       if: github.ref == 'refs/heads/dev'
       uses: burnett01/rsync-deployments@7.0.2
