@@ -9,11 +9,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.4.1",
-    "astro": "^5.11.0",
-    "astro-vtbot": "^2.1.5"
+    "@astrojs/sitemap": "^3.5.1",
+    "astro": "^5.13.5",
+    "astro-vtbot": "^2.1.8"
   },
   "devDependencies": {
-    "sass-embedded": "^1.89.2"
+    "sass-embedded": "^1.91.0"
   }
 }
