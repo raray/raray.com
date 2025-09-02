@@ -14,7 +14,7 @@ Here is a selection of case studies from some of the more impactful projects Iâ€
 - [Azul.com](/work/azul/)
 - [KIOTI.com](/work/kioti/)
 - [PerryWeather.com](/work/perryweather/)
-- [Electragram](https://www.vogue.com/article/electragram-online-stationery-company-anna-carter) (case study coming soon)
+- [Electragram](/work/electragram)
 - [TakeCommandHealth.com](https://takecommandhealth.com/) (case study coming soon)
 
 ##### Firescope
